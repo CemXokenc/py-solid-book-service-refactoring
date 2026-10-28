@@ -1,4 +1,5 @@
 import json
+from typing import TypeVar
 from xml.etree.ElementTree import Element, SubElement, tostring
 from abc import ABC, abstractmethod
 
@@ -82,8 +83,10 @@ SERIALIZERS: dict[str, SerializeBook] = {
     "xml": XMLSerializeBook(),
 }
 
+T = TypeVar("T")
 
-def get_handler[T](registry: dict[str, T], key: str, kind: str) -> T:
+
+def get_handler(registry: dict[str, T], key: str, kind: str) -> T:
     try:
         return registry[key]
     except KeyError:
